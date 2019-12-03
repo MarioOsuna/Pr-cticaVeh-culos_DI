@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">vehiculos</string>
+    <string name="gestion">Gestión de vehículos</string>
+    <string name="insertar">Insertar</string>
+    <string name="mostrar">Mostrar</string>
+    <string name="modificar">Modificar</string>
+    <string name="Borrar">Borrar</string>
+    <string name="Coches">Coches</string>
+    <string name="Gastos" >Gastos</string>
+    <string name="Matrícula">Matrícula</string>
+    <string name="Marca">marca</string>
+    <string name="Valor">Valor</string>
+    <string name="Concepto">Concepto</string>
+    <string name="Enviar">Enviar</string>
+</resources>
