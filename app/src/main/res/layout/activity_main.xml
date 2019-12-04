@@ -7,72 +7,91 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/buttonMostrar"
+        android:id="@+id/buttonMostrarCoche"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
-        android:text="@string/mostrar"
+        android:layout_marginTop="120dp"
+        android:text="@string/mostrarCoches"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonModificar"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonMostrarGasto"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="12dp"
-        android:text="@string/modificar"
-        app:layout_constraintBottom_toTopOf="@+id/buttonMostrar"
-        app:layout_constraintEnd_toStartOf="@+id/buttonBorrar" />
+        android:layout_marginTop="14dp"
+        android:text="@string/mostrarGastos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMostrarCoche" />
 
     <Button
-        android:id="@+id/buttonInsertar"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonInsertarCoche"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="12dp"
-        android:text="@string/insertar"
-        app:layout_constraintBottom_toTopOf="@+id/buttonMostrar"
-        app:layout_constraintEnd_toStartOf="@+id/buttonModificar"
-        app:layout_constraintHorizontal_bias="0.074"
-        app:layout_constraintStart_toStartOf="@+id/buttonMostrar"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_marginStart="16dp"
+        android:text="@string/insertarCoches"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonModificarCoche"
+        app:layout_constraintEnd_toStartOf="@+id/buttonModificarGasto"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonBorrar"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonModificarCoche"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="12dp"
-        android:text="@string/Borrar"
-        app:layout_constraintBottom_toTopOf="@+id/buttonMostrar"
-        app:layout_constraintEnd_toEndOf="@+id/buttonMostrar"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:layout_marginTop="12dp"
+        android:text="@string/modificarCoches"
+        app:layout_constraintEnd_toStartOf="@+id/buttonBorrarCoche"
+        app:layout_constraintStart_toEndOf="@+id/buttonInsertarCoche"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonBorrarCoche"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/BorrarCoches"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonModificarCoche"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonModificarCoche" />
+
+    <Button
+        android:id="@+id/buttonModificarGasto"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/modificarGastos"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMostrarCoche"
+        app:layout_constraintEnd_toStartOf="@+id/buttonBorrarCoche"
+        app:layout_constraintStart_toEndOf="@+id/buttonInsertarGasto" />
+
+    <Button
+        android:id="@+id/buttonBorrarGasto"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/BorrarGastos"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonModificarGasto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonModificarGasto" />
+
+    <Button
+        android:id="@+id/buttonInsertarGasto"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/insertarGastos"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonModificarGasto"
+        app:layout_constraintEnd_toStartOf="@+id/buttonModificarGasto"
+        app:layout_constraintStart_toStartOf="@+id/buttonInsertarCoche" />
 
     <ListView
         android:id="@+id/Lista"
-        android:layout_width="427dp"
-        android:layout_height="500dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/buttonMostrar"
-        app:layout_constraintTop_toBottomOf="@+id/buttonMostrar"
-        app:layout_constraintVertical_bias="0.842" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="32dp"
-        android:text="@string/gestion"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonModificar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonMostrarGasto" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

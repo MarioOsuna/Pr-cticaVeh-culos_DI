@@ -2,10 +2,6 @@
 <resources>
     <string name="app_name">vehiculos</string>
     <string name="gestion">" Vehicle Management"</string>
-    <string name="insertar">Insert</string>
-    <string name="Borrar">Delete</string>
-    <string name="modificar">Update</string>
-    <string name="mostrar">To show</string>
     <string name="Coches">Cars</string>
     <string name="Gastos">Expenses</string>
     <string name="Matrícula">Enrollment</string>
@@ -13,4 +9,13 @@
     <string name="Concepto">Concept</string>
     <string name="Marca">Brand</string>
     <string name="Valor">Value</string>
+    <string name="Tablas">Table</string>
+    <string name="BorrarCoches">Delete cars</string>
+    <string name="BorrarGastos">Delete Expenses</string>
+    <string name="insertarCoches">Insert cars</string>
+    <string name="insertarGastos">Insert expenses</string>
+    <string name="modificarCoches">Update cars</string>
+    <string name="modificarGastos">Update Expenses</string>
+    <string name="mostrarCoches">To show cars</string>
+    <string name="mostrarGastos">To show expenses</string>
 </resources>
