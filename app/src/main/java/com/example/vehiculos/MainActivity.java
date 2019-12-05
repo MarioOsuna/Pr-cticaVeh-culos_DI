@@ -14,14 +14,24 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     static String NOMBRE = "NOMBRE";
@@ -34,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private int MOD_GASTO = 4;
     private int BOR_COCHE = 5;
     private int BOR_GASTO = 6;
-    static String SERVIDOR = "http://192.168.100.19/";
+    //static String SERVIDOR = "http://192.168.100.19";
+    static String SERVIDOR = "http://192.168.0.111:8080";
     ProgressDialog progressDialog;
 
     @Override
@@ -60,13 +71,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DescargarCSV descargarCSV = new DescargarCSV();
-                descargarCSV.execute("web/listadoCSV.php");
+                //  descargarCSV.execute("/web/listadoCSV.php");
+                descargarCSV.execute("/pract/listadoCSV.php");
             }
         });
         buttonMostrarGastos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                DescargarJSON descargarJSON = new DescargarJSON();
+                //  descargarJSON.execute("/web/listadoJSON.php");
+                descargarJSON.execute("/pract/listadoJSON.php");
             }
         });
 
@@ -120,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private class DescargarCSV extends AsyncTask<String, Void, Void> {
         String total = "";
 
@@ -142,9 +157,9 @@ public class MainActivity extends AppCompatActivity {
 
             for (String lin : lineas) {
                 String[] campos = lin.split(",");
-                String dato = "MATRÍCULA: " + campos[0];
-                dato += "MARCA: " + campos[1];
-                dato += "COLOR: " + campos[2];
+                String dato = " MATRÍCULA: " + campos[0];
+                dato += " MARCA: " + campos[1];
+                dato += " COLOR: " + campos[2];
                 list.add(dato);
             }
             adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, list);
@@ -193,6 +208,91 @@ public class MainActivity extends AppCompatActivity {
             Log.i("CONEXION", total);
 
             return null;
+        }
+    }
+    private class DescargarJSON extends AsyncTask<String, Void, Void> {
+        List<String> list = new ArrayList<String>();
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            String script = strings[0];
+            String url = SERVIDOR + script;
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            String contenido = "";
+            try {
+
+                URLConnection conexion = null;
+
+                conexion = new URL(url).openConnection();
+                conexion.connect();
+                InputStream inputStream = conexion.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+
+                String linea = "";
+
+                while ((linea = br.readLine()) != null) {
+                    contenido += linea;
+
+                }
+                br.close();
+
+            } catch (MalformedURLException ex) {
+            } catch (UnsupportedEncodingException ex) {
+            } catch (IOException ex) {
+            }
+            JsonParser parser = new JsonParser();
+            JsonArray jsonArray = parser.parse(contenido).getAsJsonArray();
+            String fila1="ID\t\t\tMatrícula\t\t\tConcepto\t\t\t\t\tValor";
+            list.add(fila1);
+            for (JsonElement elemento : jsonArray) {
+                String fila = "";
+                JsonObject objeto = elemento.getAsJsonObject();
+
+
+                Set<Map.Entry<String, JsonElement>> entrySet = objeto.entrySet();
+                int contador = 0;
+
+                for (Map.Entry<String, JsonElement> entry : entrySet) {
+                    if (contador % 2 != 0) {
+                        fila += "  "+entry.getValue().getAsString();
+                    }
+                    contador++;
+                    // entry.getValue();
+
+                }
+
+                list.add(fila);
+
+
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setTitle("Descargando la información de la red en JSON.");
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            ArrayAdapter<String> adapter;
+
+            adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, list);
+            lista.setAdapter(adapter);
+
+            progressDialog.dismiss();
         }
     }
 
